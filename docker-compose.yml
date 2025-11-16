@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  # The Backend Service
+  backend:
+    build: ./backend
+    container_name: backend-container
+    ports:
+      - "5000:5000"
+    restart: always
+
+  # The Frontend Service
+  frontend:
+    build: ./frontend
+    container_name: frontend-container
+    ports:
+      - "3000:80"
+    restart: always
+    # This makes sure the backend starts up before the frontend tries to connect
+    depends_on:
+      - backend
+
+  # Will add 'ai-ml' service here later
+  # ai-ml:
+  #   build: ./ai-ml
+  #   ...

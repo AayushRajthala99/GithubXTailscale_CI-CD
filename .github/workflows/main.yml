@@ -4,24 +4,27 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'backend/**'
+      - 'frontend/**'
+      - 'docker-compose.yml'
 
 jobs:
   build-and-deploy:
-    # Use the labels you defined
-    # This job will ONLY run on runners that have ALL these labels
+    name: Build and Deploy All Services
+    environment: staging
     runs-on: [tailscaleCD-CD]
 
     steps:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Build Docker Image
-        run: docker build -t Backend-Container .
+      # Install Docker Compose if it's not on your VM
+      #- name: Install Docker Compose
+      #  run: |
+      #    sudo apt-get update
+      #    sudo apt-get install -y docker-compose-v2
 
-      - name: Stop and Remove Old Container
-        run: |
-          docker stop Backend-Container || true
-          docker rm Backend-Container || true
-
-      - name: Deploy New Container
-        run: docker run -d --name Backend-Container -p 5000:5000 Backend-Container
+      # This one command replaces all your 'docker build/stop/rm/run' steps
+      - name: Build and Deploy with Docker Compose
+        run: docker-compose up -d --build
