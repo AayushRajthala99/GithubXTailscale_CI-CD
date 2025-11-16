@@ -3,7 +3,7 @@ name: GithubXTailscale_CI-CD
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - 'backend/**'
       - 'frontend/**'
