@@ -1,0 +1,27 @@
+name: GithubXTailscale_CI-CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    # Use the labels you defined
+    # This job will ONLY run on runners that have ALL these labels
+    runs-on: [tailscaleCD-CD]
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: docker build -t Backend-Container .
+
+      - name: Stop and Remove Old Container
+        run: |
+          docker stop Backend-Container || true
+          docker rm Backend-Container || true
+
+      - name: Deploy New Container
+        run: docker run -d --name Backend-Container -p 5000:5000 Backend-Container
