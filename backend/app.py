@@ -4,6 +4,8 @@ from flask_cors import CORS  # Import CORS
 app = Flask(__name__)
 CORS(app)  # This enables CORS for all routes in your app
 
+# Added a random comment for testing purposes of Github Actions triggering...
+
 
 @app.route("/")
 def hello():
