@@ -35,6 +35,7 @@ A full-stack application with automated CI/CD pipeline using GitHub Actions and 
 - Node.js 22+ (for local development)
 - Python 3.12+ (for local development)
 - Git
+- Tailscale (Optional)
 
 ## Quick Start
 
@@ -42,7 +43,7 @@ A full-stack application with automated CI/CD pipeline using GitHub Actions and 
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/AayushRajthala99/GithubXTailscale_CI-CD
 cd GithubXTailscale_CI-CD
 ```
 
@@ -55,6 +56,7 @@ docker compose up -d --build
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:5000
 - Backend Health Check: http://localhost:5000/health
+> Note: You can replace `http://localhost` with the MagicDNS provided by Tailscale for the machine hosting these services.
 
 4. Stop the services:
 ```bash
@@ -97,6 +99,7 @@ The GitHub Actions workflow (`.github/workflows/master.yml`) automatically:
 - **Backend**: Flask app with Gunicorn, 4 workers, health check endpoint
 - **Network**: Bridge network for container communication
 - **Health Checks**: Backend has health checks ensuring frontend waits for backend to be ready
+- **Secure Reachability**: Tailscale network as secure encrypteed channel to access the application
 
 ## Environment Variables
 
@@ -142,6 +145,6 @@ docker compose build --no-cache
 docker compose up -d
 ```
 
-## License
+## Authors
 
-MIT
+Aayush Rajthala x Github Co-Pilot
