@@ -9,9 +9,8 @@ function App() {
   // useEffect runs when the component loads
   useEffect(() => {
     // We call the backend API
-    // In the docker-compose setup, 'backend' is the hostname for the backend service.
-    // When running locally (not in Docker), you would use 'http://localhost:5000'
-    fetch("http://localhost:5000")
+    // The /api/ prefix is proxied to the backend service by nginx
+    fetch("/api/")
       .then((response) => response.json())
       .then((data) => {
         // We set the state variable with the message from the backend

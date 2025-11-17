@@ -20,12 +20,13 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      # Install Docker Compose if it's not on your VM
-      # - name: Install Docker Compose
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y docker-compose-v2
+      - name: Stop and Remove Old Containers
+        run: docker compose down
 
-      # This one command replaces all your 'docker build/stop/rm/run' steps
+      - name: Prune Old Docker Images (Clear Cache)
+        # The -a flag removes all unused images (not just dangling)
+        # The -f flag forces the removal without a prompt
+        run: docker image prune -a -f
+
       - name: Build and Deploy with Docker Compose
         run: docker compose up -d --build
