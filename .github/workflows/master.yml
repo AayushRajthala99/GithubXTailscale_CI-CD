@@ -8,6 +8,7 @@ on:
       - 'backend/**'
       - 'frontend/**'
       - 'docker-compose.yml'
+      - '.github/workflows/master.yml'
 
 jobs:
   build-and-deploy:
@@ -27,4 +28,4 @@ jobs:
 
       # This one command replaces all your 'docker build/stop/rm/run' steps
       - name: Build and Deploy with Docker Compose
-        run: docker-compose up -d --build
+        run: docker compose up -d --build
