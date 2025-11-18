@@ -17,13 +17,7 @@ def hello():
 def health():
     # Health check endpoint for Docker
     return {"status": "healthy"}, 200
-
-
-@app.route("/environment")
-def environment():
-    # Environment endpoint to return environment variables or info
-    return {"environment": "development"}, 200
-
+    
 
 if __name__ == "__main__":
     # Use environment variable for debug mode, default to False in production
